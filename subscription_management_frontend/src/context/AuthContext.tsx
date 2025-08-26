@@ -13,7 +13,7 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const API_BASE_URL = 'http://localhost:8000'; // Update with your Django backend URL
+const API_BASE_URL = 'https://subscription-management-project.onrender.com'; // Update with your Django backend URL
 
 // Configure axios defaults
 axios.defaults.baseURL = API_BASE_URL;
