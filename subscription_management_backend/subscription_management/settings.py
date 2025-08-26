@@ -38,7 +38,7 @@ from dotenv import load_dotenv
 load_dotenv()  # take environment variables from .env
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
+RUN_CREATE_ADMIN_ON_STARTUP = True
 # Application definition
 
 INSTALLED_APPS = [
