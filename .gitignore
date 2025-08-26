@@ -1,0 +1,39 @@
+# Python
+*.pyc
+*.pyo
+__pycache__/
+*.pyd
+*.sqlite3
+db.sqlite3
+venv/
+.env
+*.log
+
+# Django migrations
+**/migrations/*.py
+!**/migrations/__init__.py
+
+# Node / React
+node_modules/
+dist/
+build/
+.cache/
+*.tsbuildinfo
+
+# Vite
+.vite/
+
+# Env files
+.env
+frontend/.env
+backend/.env
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+
+# Coverage / testing
+.coverage
+htmlcov/
+.pytest_cache/
