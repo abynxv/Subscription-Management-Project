@@ -2,7 +2,7 @@ import os
 from openai import OpenAI
 from django.conf import settings
 
-client = OpenAI()  
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
 def generate_ai_suggestions(subscriptions):
