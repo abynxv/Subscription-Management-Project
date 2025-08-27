@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-=ej-)tyglyt+lot0tb(q=5i@_u+2f%+anj))1d7viu_caeqh8y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+# For Local Testing 
+# ALLOWED_HOSTS = ["*"]
+
+ALLOWED_HOSTS = ["https://subscription-management-project-1.onrender.com","subscription-management-project.onrender.com"]
 
 AUTH_USER_MODEL = "auth_app.CustomUser"
 
@@ -35,7 +38,7 @@ from dotenv import load_dotenv
 load_dotenv()  # take environment variables from .env
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
+RUN_CREATE_ADMIN_ON_STARTUP = True
 # Application definition
 
 INSTALLED_APPS = [
