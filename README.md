@@ -1,6 +1,5 @@
 > Issues :
 > 1. AI Analytics configured, not working as expected, still in testing.
-> 2. In Admin UI user role showing incorrect, working on it
 
 ## Subscription Management Project
 
