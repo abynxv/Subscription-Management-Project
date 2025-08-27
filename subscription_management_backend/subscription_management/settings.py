@@ -28,7 +28,7 @@ DEBUG = True
 # For Local Testing 
 # ALLOWED_HOSTS = ["*"]
 
-ALLOWED_HOSTS = ["https://subscription-management-project-1.onrender.com"]
+ALLOWED_HOSTS = ["https://subscription-management-project-1.onrender.com","subscription-management-project.onrender.com"]
 
 AUTH_USER_MODEL = "auth_app.CustomUser"
 
