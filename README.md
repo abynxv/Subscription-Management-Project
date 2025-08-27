@@ -1,4 +1,6 @@
-# Subscription Management Project
+> AI Analytics configured, not working as expected, still in testing.
+
+## Subscription Management Project
 
 A full-stack subscription management system with admin and user roles, powered by Django REST Framework (backend) and React (frontend). This project includes automated AI suggestions using OpenAI API and role-based access management.
 
