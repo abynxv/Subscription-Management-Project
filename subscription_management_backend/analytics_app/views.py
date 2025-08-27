@@ -14,7 +14,7 @@ class UpcomingRenewalsView(APIView):
         today = now().date()
         next_week = today + timedelta(days=7)
         renewals = Subscription.objects.filter(
-         user=request.user, renewal_date__range=(today, next_week)  # ✅ Fixed
+         user=request.user, renewal_date__range=(today, next_week)
         )
         data = [{"service": r.service_name, "renewal_date": r.renewal_date} for r in renewals]
         return Response(data)
@@ -26,7 +26,7 @@ class SubscriptionSummaryView(APIView):
     def get(self, request):
         subs = Subscription.objects.filter(user=request.user)
         total = subs.count()
-        total_spent = sum([s.cost for s in subs])  # ✅ Fixed
+        total_spent = sum([s.cost for s in subs])
         return Response({"total_subscriptions": total, "total_spent": total_spent})
 
 
