@@ -72,7 +72,8 @@ const AdminDashboard: React.FC<{ subscriptions: Subscription[] }> = ({ subscript
   // Calculate admin metrics
   const totalSubscriptions = subscriptions.length;
   // const totalUsers = new Set(subscriptions.map(sub => sub.user)).size;
-  const totalUsers = users.filter(u => u.role === "user").length;
+  // const totalUsers = users.filter(u => u.role === "user").length;
+  const totalUsers = users.length;
   const totalSpending = subscriptions.reduce((sum, sub) => sum + parseFloat(sub.cost || '0'), 0);
   
   // Get upcoming renewals for all users
