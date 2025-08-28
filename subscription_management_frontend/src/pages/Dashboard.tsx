@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { subscriptionsApi } from '../api/subscriptions';
+import { usersApi } from '../api/users';
 import { UpcomingRenewal, SubscriptionSummary, Subscription } from '../types';
 import { 
   Users, 
@@ -20,6 +21,7 @@ export const Dashboard: React.FC = () => {
   const [upcomingRenewals, setUpcomingRenewals] = useState<UpcomingRenewal[]>([]);
   const [summary, setSummary] = useState<SubscriptionSummary | null>(null);
   const [allSubscriptions, setAllSubscriptions] = useState<Subscription[]>([]);
+  const [allUsers, setAllUsers] = useState<User[]>([]);
 
   useEffect(() => {
     fetchDashboardData();
@@ -32,12 +34,13 @@ export const Dashboard: React.FC = () => {
         subscriptionsApi.getUpcomingRenewals(),
         subscriptionsApi.getSubscriptionSummary(),
         subscriptionsApi.getSubscriptions(),
-        subscriptionsApi.getUsers(),
+        usersApi.getUsers()
       ]);
       
       setUpcomingRenewals(renewalsData);
       setSummary(summaryData);
       setAllSubscriptions(subscriptionsData);
+      setAllUsers(usersData);
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
     } finally {
@@ -54,7 +57,7 @@ export const Dashboard: React.FC = () => {
   }
 
   if (user?.role === 'admin') {
-    return <AdminDashboard subscriptions={allSubscriptions} />;
+    return <AdminDashboard subscriptions={allSubscriptions} users={allUsers} />;
   }
 
   return (
@@ -72,8 +75,8 @@ const AdminDashboard: React.FC<{ subscriptions: Subscription[] }> = ({ subscript
   // Calculate admin metrics
   const totalSubscriptions = subscriptions.length;
   // const totalUsers = new Set(subscriptions.map(sub => sub.user)).size;
-  // const totalUsers = users.filter(u => u.role === "user").length;
-  const totalUsers = users.length;
+  const totalUsers = users.filter(u => u.role === "user").length;
+  // const totalUsers = users.length;
   const totalSpending = subscriptions.reduce((sum, sub) => sum + parseFloat(sub.cost || '0'), 0);
   
   // Get upcoming renewals for all users
