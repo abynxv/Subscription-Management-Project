@@ -1,5 +1,10 @@
 > Production_V1 bugs and Testing
-> AI Analytics functionality checking
+
+## Existing Issues :
+
+1. AI Analytics functionality not working
+2. Total users count in Admin Interface showing incorrect
+3. In Admin Interface users table, created_at & status columns hardcoded.
 
 ## Issues Resolved :
 
