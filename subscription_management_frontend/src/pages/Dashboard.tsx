@@ -30,7 +30,7 @@ export const Dashboard: React.FC = () => {
   const fetchDashboardData = async () => {
     try {
       setLoading(true);
-      const [renewalsData, summaryData, subscriptionsData] = await Promise.all([
+      const [renewalsData, summaryData, subscriptionsData, usersData] = await Promise.all([
         subscriptionsApi.getUpcomingRenewals(),
         subscriptionsApi.getSubscriptionSummary(),
         subscriptionsApi.getSubscriptions(),
@@ -69,7 +69,7 @@ export const Dashboard: React.FC = () => {
   );
 };
 
-const AdminDashboard: React.FC<{ subscriptions: Subscription[] }> = ({ subscriptions }) => {
+const AdminDashboard: React.FC<{ subscriptions: Subscription[] , users: User[] }> = ({ subscriptions, users }) => {
   const navigate = useNavigate();
   
   // Calculate admin metrics
