@@ -19,10 +19,10 @@ import {
 } from 'recharts';
 import { 
   TrendingUp, 
-  TrendingDown, 
+  Calculator,
   AlertTriangle, 
   Info, 
-  DollarSign 
+  ShoppingCart
 } from 'lucide-react';
 
 export const Analytics: React.FC = () => {
@@ -103,7 +103,7 @@ export const Analytics: React.FC = () => {
             <div className="p-5">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <DollarSign className="h-6 w-6 text-blue-600" />
+                  <ShoppingCart className="h-6 w-6 text-blue-600" />
                 </div>
                 <div className="ml-5 w-0 flex-1">
                   <dl>
@@ -124,7 +124,7 @@ export const Analytics: React.FC = () => {
                 <div className="ml-5 w-0 flex-1">
                   <dl>
                     <dt className="text-sm font-medium text-gray-500 truncate">Monthly Total</dt>
-                    <dd className="text-lg font-medium text-gray-900">${summary.monthly_total}</dd>
+                    <dd className="text-lg font-medium text-gray-900">{summary.monthly_total}₹</dd>
                   </dl>
                 </div>
               </div>
@@ -140,7 +140,7 @@ export const Analytics: React.FC = () => {
                 <div className="ml-5 w-0 flex-1">
                   <dl>
                     <dt className="text-sm font-medium text-gray-500 truncate">Yearly Total</dt>
-                    <dd className="text-lg font-medium text-gray-900">${summary.yearly_total}</dd>
+                    <dd className="text-lg font-medium text-gray-900">{summary.yearly_total}₹</dd>
                   </dl>
                 </div>
               </div>
@@ -151,12 +151,12 @@ export const Analytics: React.FC = () => {
             <div className="p-5">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <TrendingDown className="h-6 w-6 text-amber-600" />
+                  <Calculator className="h-6 w-6 text-amber-600" />
                 </div>
                 <div className="ml-5 w-0 flex-1">
                   <dl>
                     <dt className="text-sm font-medium text-gray-500 truncate">Average Cost</dt>
-                    <dd className="text-lg font-medium text-gray-900">${summary.average_cost}</dd>
+                    <dd className="text-lg font-medium text-gray-900">{summary.average_cost}₹</dd>
                   </dl>
                 </div>
               </div>
@@ -177,7 +177,7 @@ export const Analytics: React.FC = () => {
                   cx="50%"
                   cy="50%"
                   labelLine={false}
-                  label={({ name, value }) => `${name}: $${value}`}
+                  label={({ name, value }) => `${name}: ${value}₹`}
                   outerRadius={80}
                   fill="#8884d8"
                   dataKey="value"
@@ -186,7 +186,7 @@ export const Analytics: React.FC = () => {
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip formatter={(value) => [`$${value}`, 'Amount']} />
+                <Tooltip formatter={(value) => [`${value}₹`, 'Amount']} />
                 <Legend />
               </PieChart>
             </ResponsiveContainer>
@@ -206,7 +206,7 @@ export const Analytics: React.FC = () => {
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis type="number" />
                 <YAxis dataKey="name" type="category" width={80} />
-                <Tooltip formatter={(value) => [`$${value}`, 'Cost']} />
+                <Tooltip formatter={(value) => [`${value}₹`, 'Cost']} />
                 <Bar dataKey="cost" fill="#3B82F6" />
               </BarChart>
             </ResponsiveContainer>
@@ -272,7 +272,7 @@ export const Analytics: React.FC = () => {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" angle={-45} textAnchor="end" height={80} />
               <YAxis />
-              <Tooltip formatter={(value) => [`$${value}`, 'Cost']} />
+              <Tooltip formatter={(value) => [`${value}₹`, 'Cost']} />
               <Line type="monotone" dataKey="cost" stroke="#3B82F6" strokeWidth={2} />
             </LineChart>
           </ResponsiveContainer>

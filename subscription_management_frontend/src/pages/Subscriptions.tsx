@@ -326,7 +326,7 @@ const SubscriptionCard: React.FC<{
       <div className="space-y-2">
         <div className="flex justify-between">
           <span className="text-sm text-gray-500">Cost:</span>
-          <span className="font-medium">${subscription.cost}/{subscription.billing_cycle}</span>
+          <span className="font-medium">{subscription.cost}₹/{subscription.billing_cycle}</span>
         </div>
         
         <div className="flex justify-between items-center">

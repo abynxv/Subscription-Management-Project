@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { subscriptionsApi } from '../api/subscriptions';
 import { usersApi } from '../api/users';
-import { UpcomingRenewal, SubscriptionSummary, Subscription } from '../types';
+import { UpcomingRenewal, SubscriptionSummary, Subscription, User } from '../types';
 import { 
   Users, 
   CreditCard, 
@@ -10,7 +10,7 @@ import {
   AlertTriangle,
   Plus,
   Calendar,
-  DollarSign
+  IndianRupeeIcon
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -74,9 +74,7 @@ const AdminDashboard: React.FC<{ subscriptions: Subscription[] , users: User[] }
   
   // Calculate admin metrics
   const totalSubscriptions = subscriptions.length;
-  // const totalUsers = new Set(subscriptions.map(sub => sub.user)).size;
   const totalUsers = users.filter(u => u.role === "user").length;
-  // const totalUsers = users.length;
   const totalSpending = subscriptions.reduce((sum, sub) => sum + parseFloat(sub.cost || '0'), 0);
   
   // Get upcoming renewals for all users
@@ -155,12 +153,12 @@ const AdminDashboard: React.FC<{ subscriptions: Subscription[] , users: User[] }
           <div className="p-5">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <DollarSign className="h-6 w-6 text-purple-600" />
+                <IndianRupeeIcon className="h-6 w-6 text-purple-600" />
               </div>
               <div className="ml-5 w-0 flex-1">
                 <dl>
                   <dt className="text-sm font-medium text-gray-500 truncate">System Spending</dt>
-                  <dd className="text-lg font-medium text-gray-900">${totalSpending.toFixed(2)}</dd>
+                  <dd className="text-lg font-medium text-gray-900">{totalSpending.toFixed(2)}₹</dd>
                 </dl>
               </div>
             </div>
@@ -187,12 +185,13 @@ const AdminDashboard: React.FC<{ subscriptions: Subscription[] , users: User[] }
                     <div>
                       <p className="font-medium text-gray-900">{renewal.service_name}</p>
                       <p className="text-sm text-gray-500">
-                        {new Date(renewal.renewal_date).toLocaleDateString()} 
-                        ({renewal.days_until_renewal} days)
+                        {new Date(renewal.renewal_date).toLocaleDateString()}                  
+                        ({Math.ceil((new Date(renewal.renewal_date) - new Date()) / (1000 * 60 * 60 * 24)
+                        )} days)
                       </p>
                     </div>
                   </div>
-                  <span className="font-semibold text-gray-900">${renewal.cost}</span>
+                  <span className="font-semibold text-gray-900">{renewal.cost}₹</span>
                 </div>
               ))}
               
@@ -267,7 +266,7 @@ const UserDashboard: React.FC<{
                 <div className="ml-5 w-0 flex-1">
                   <dl>
                     <dt className="text-sm font-medium text-gray-500 truncate">Monthly Total</dt>
-                    <dd className="text-lg font-medium text-gray-900">${summary.monthly_total}</dd>
+                    <dd className="text-lg font-medium text-gray-900">{summary.monthly_total}₹</dd>
                   </dl>
                 </div>
               </div>
@@ -278,12 +277,12 @@ const UserDashboard: React.FC<{
             <div className="p-5">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <DollarSign className="h-6 w-6 text-purple-600" />
+                  <IndianRupeeIcon className="h-6 w-6 text-purple-600" />
                 </div>
                 <div className="ml-5 w-0 flex-1">
                   <dl>
                     <dt className="text-sm font-medium text-gray-500 truncate">Yearly Total</dt>
-                    <dd className="text-lg font-medium text-gray-900">${summary.yearly_total}</dd>
+                    <dd className="text-lg font-medium text-gray-900">{summary.yearly_total}₹</dd>
                   </dl>
                 </div>
               </div>
@@ -299,7 +298,7 @@ const UserDashboard: React.FC<{
                 <div className="ml-5 w-0 flex-1">
                   <dl>
                     <dt className="text-sm font-medium text-gray-500 truncate">Average Cost</dt>
-                    <dd className="text-lg font-medium text-gray-900">${summary.average_cost}</dd>
+                    <dd className="text-lg font-medium text-gray-900">{summary.average_cost}₹</dd>
                   </dl>
                 </div>
               </div>
@@ -333,7 +332,7 @@ const UserDashboard: React.FC<{
                         </p>
                       </div>
                     </div>
-                    <span className="font-semibold text-gray-900">${renewal.cost}</span>
+                    <span className="font-semibold text-gray-900">{renewal.cost}₹</span>
                   </div>
                 ))}
               </div>
@@ -365,7 +364,7 @@ const UserDashboard: React.FC<{
                       <p className="text-sm text-gray-500">Shared by admin</p>
                     </div>
                     <span className="text-sm font-medium text-blue-600">
-                      ${subscription.cost}/{subscription.billing_cycle}
+                      {subscription.cost}₹/{subscription.billing_cycle}
                     </span>
                   </div>
                 ))}

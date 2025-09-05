@@ -3,6 +3,8 @@ export interface User {
   email: string;
   username?: string;
   role: 'admin' | 'user';
+  is_active: boolean;
+  date_joined: string;
 }
 
 export interface LoginCredentials {
@@ -20,6 +22,10 @@ export interface CreateUserData {
   username: string;
   email: string;
   password: string;
+}
+
+export interface UpdateUserData extends CreateUserData {
+  is_active?: boolean;
 }
 
 export interface Subscription {
